@@ -1,0 +1,52 @@
+{
+  "name": "jv-forms",
+  "version": "0.1.0",
+  "description": "JV Forms: forms for JV app",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gulp --type dev",
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
+  },
+  "dependencies": {
+    "bluebird": "~2.9.27",
+    "bootstrap": "^3.3.0",
+    "flux": "^2.0.3",
+    "jwt-decode": "^1.1.0",
+    "keymirror": "^0.1.1",
+    "object-assign": "^2.0.0",
+    "react": "^0.13.3",
+    "react-bootstrap": "^0.22.6",
+    "react-mixin": "^1.1.0",
+    "react-router": "^0.13.3",
+    "request": "^2.57.0",
+    "reqwest": "^1.1.5"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
+    "gulp": "^3.8.7",
+    "gulp-connect": "^2.2.0",
+    "gulp-livereload": "^3.8.0",
+    "gulp-sass": "^2.0.1",
+    "gulp-util": "^3.0.4",
+    "reactify": "^1.1.1",
+    "require-dir": "^0.3.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.1"
+  }
+}
