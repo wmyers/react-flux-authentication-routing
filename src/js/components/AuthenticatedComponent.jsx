@@ -1,8 +1,7 @@
 import React from 'react';
 import LoginStore from '../stores/LoginStore';
-import AppStore from '../stores/AppStore';
 import LoginActionCreators from '../actions/LoginActionCreators';
-import AppActionCreators from '../actions/AppActionCreators';
+import RouterActionCreators from '../actions/RouterActionCreators';
 
 /**
  * Exports a higher-order component that connects the component to the LoginStore.
@@ -14,24 +13,19 @@ export default (ComposedComponent) => {
 
     static willTransitionTo(transition) {
 
+      console.log('&*&*&* willTransitionTo for authenticated page. Next transition path:', transition.path, 'logged in:', LoginStore.isLoggedIn());
+
       if (!LoginStore.isLoggedIn()) {
-        console.log('&*&*&* Not logged-in for authenticated page. Next transition path:', transition.path);
 
         let transitionPath = transition.path;
 
-        //store next path in AppStore for redirecting after authentication
-        AppActionCreators.storeRouterTransitionPath(transitionPath);
+        //store next path in RouterStore for redirecting after authentication
+        //as opposed to storing in the router itself with:
+        // transition.redirect('/login', {}, {'nextPath' : transition.path});
+        RouterActionCreators.storeRouterTransitionPath(transitionPath);
 
-        //wait until the app controller component is mounted before
-        //attempting to auto-login
-        let autoLogin = () => LoginActionCreators.autoLoginUser();
-
-        if(AppStore.isMounted()){
-          autoLogin();
-        }else{
-          AppStore.isMountedAsPromise()
-          .then(autoLogin);
-        }
+        //go to login page
+        transition.redirect('/login');
       }
     }
 

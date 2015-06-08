@@ -21,10 +21,6 @@ export default {
     }, { username, password, extra });
   },
 
-  autoLoginUser: () => {
-    dispatch(ActionTypes.AUTO_LOGIN);
-  },
-
   logoutUser: () => {
     dispatch(ActionTypes.LOGOUT_USER);
   }

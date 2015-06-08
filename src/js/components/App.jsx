@@ -1,8 +1,7 @@
 import React from 'react';
 import LoginStore from '../stores/LoginStore';
-import AppStore from '../stores/AppStore';
+import RouterStore from '../stores/RouterStore';
 import LoginActionCreators from '../actions/LoginActionCreators';
-import AppActionCreators from '../actions/AppActionCreators';
 import { Route, RouteHandler, Link } from 'react-router';
 import router from '../router';
 
@@ -26,9 +25,6 @@ export default class App extends React.Component {
     //register change listener with LoginStore
     this.changeListener = this._onLoginChange.bind(this);
     LoginStore.addChangeListener(this.changeListener);
-
-    //notify the AppStore that the application has fully mounted
-    AppActionCreators.notifyAppMounted();
   }
 
   /*
@@ -42,7 +38,7 @@ export default class App extends React.Component {
     this.setState(userLoggedInState);
 
     //get any nextTransitionPath - NB it can only be got once then it self-nullifies
-    let transitionPath = AppStore.nextTransitionPath || '/';
+    let transitionPath = RouterStore.nextTransitionPath || '/';
 
     //trigger router change
     console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
@@ -51,14 +47,12 @@ export default class App extends React.Component {
     if(userLoggedInState.userLoggedIn){
       router.transitionTo(transitionPath);
     }else{
-      router.transitionTo('login');
+      router.transitionTo('/login');
     }
   }
 
   componentWillUnmount() {
     LoginStore.removeChangeListener(this.changeListener);
-
-    AppActionCreators.notifyAppUnmounted();
   }
 
   render() {

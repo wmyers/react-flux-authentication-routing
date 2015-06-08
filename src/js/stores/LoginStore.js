@@ -11,6 +11,10 @@ class LoginStore extends BaseStore {
     this._user = null;
     this._error = null;
     this._jwt = null;
+
+    //attempt auto-login
+    console.log('&*&*&*& attempting auto-login in LoginStore');
+    this._autoLogin();
   }
 
   _registerToActions(action) {
@@ -29,20 +33,6 @@ class LoginStore extends BaseStore {
         this.emitChange();
         break;
 
-      case ActionTypes.AUTO_LOGIN:
-        let jwt = localStorage.getItem("jv_jwt");
-        if (jwt) {
-          this._jwt = jwt;
-          this._user = jwt_decode(this._jwt);
-          console.log("&*&*&* autologin success")
-        }else{
-          this._user = null;
-          this._jwt = null;
-          console.log("&*&*&* autologin failure")
-        }
-        this.emitChange();
-        break;
-
       case ActionTypes.LOGOUT_USER:
         this._user = null;
         this._error = null;
@@ -54,6 +44,15 @@ class LoginStore extends BaseStore {
       default:
         break;
     };
+  }
+
+  _autoLogin () {
+    let jwt = localStorage.getItem("jv_jwt");
+    if (jwt) {
+      this._jwt = jwt;
+      this._user = jwt_decode(this._jwt);
+      console.log("&*&*&* autologin success")
+    }
   }
 
   get user() {

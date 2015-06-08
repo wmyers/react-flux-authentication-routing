@@ -24,10 +24,6 @@ class AppStore extends BaseStore {
         this._mounted = false;
         break;
 
-      case ActionTypes.APP_NEXT_ROUTER_TRANSITION_PATH:
-        this._nextRouterPath = action.path;
-        break;
-
       default:
         break;
     };
@@ -54,13 +50,6 @@ class AppStore extends BaseStore {
         }
       }, 20)
     })
-  }
-
-  //any value can only be retrieved once
-  get nextTransitionPath() {
-    let nextPath = this._nextRouterPath;
-    this._nextRouterPath = null;
-    return nextPath;
   }
 }
 

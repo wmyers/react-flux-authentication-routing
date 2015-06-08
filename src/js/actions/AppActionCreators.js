@@ -8,9 +8,5 @@ export default {
 
   notifyAppUnmounted: () => {
     dispatch(ActionTypes.APP_CONTROLLER_COMPONENT_UNMOUNTED);
-  },
-
-  storeRouterTransitionPath: (path) => {
-    dispatch(ActionTypes.APP_NEXT_ROUTER_TRANSITION_PATH, {path});
   }
 }
